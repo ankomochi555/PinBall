@@ -30,42 +30,55 @@ public class TapFripper : MonoBehaviour
     {
         if(Input.touchCount > 0)
         {
-            Touch touch = Input.GetTouch(0);
+            Touch myTouch = Input.GetTouch(0);
 
             
-            if (touch.phase == TouchPhase.Began) 
+            if (myTouch.phase == TouchPhase.Began) 
             {
                 //左画面をタップしたとき左フリッパーを動かす
-                if (touch.position.x < Screen.width * 0.5f && tag == "LeftFripperTag")
+                if (myTouch.position.x < Screen.width * 0.5f && tag == "LeftFripperTag")
                 {
                     SetAngle(this.flickAngle);
                 }
 
                 //右画面をタップした時右フリッパーを動かす
-                if (touch.position.x > Screen.width * 0.5f && tag == "RightFripperTag")
+                if (myTouch.position.x > Screen.width * 0.5f && tag == "RightFripperTag")
                 {
                     SetAngle(this.flickAngle);
                 }
-
+               
+                Touch[] myTouches = Input.touches;
+                for (int i = 1; i < Input.touchCount; i++)
+                {
+                    SetAngle(this.flickAngle);
+                }
             }
 
+
             
             
 
             
-            if(touch.phase == TouchPhase.Ended)
+            if(myTouch.phase == TouchPhase.Ended)
             {
                 //指を離したとき左フリッパーを元に戻す
-                if (touch.position.x < Screen.width * 0.5f && tag == "LeftFripperTag")
+                if (myTouch.position.x < Screen.width * 0.5f && tag == "LeftFripperTag")
                 {
                     SetAngle(this.defaultAngle);
                 }
                
                 //指を離したとき右フリッパーを元に戻す
-                if(touch.position.x > Screen.width * 0.5f && tag == "RightFripperTag")
+                if(myTouch.position.x > Screen.width * 0.5f && tag == "RightFripperTag")
                 {
                     SetAngle(this.defaultAngle);
                 }
+
+                Touch[] myTouches = Input.touches;
+                for (int i = 1; i < Input.touchCount; i++)
+                {
+                    SetAngle(this.defaultAngle);
+                }
+
             }
             
         }
